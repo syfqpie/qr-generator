@@ -7,7 +7,7 @@ from services.qr_gen import QRModel
 
 router = APIRouter()
 
-@router.post("/generate_qr", summary="Generate QR", description="Generate QR Code")
+@router.post("/qr/generate", summary="Generate QR", description="Generate QR Code")
 def generate_qr(item: QRModel):
     try:
         result = services.qr_generator.generate(item)

@@ -1,6 +1,6 @@
 from logging.config import fileConfig
 
-import os
+from decouple import config
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -30,11 +30,12 @@ target_metadata = Base.metadata
 
 
 def get_url():
-    user = os.getenv("DB_USER", "postgres")
-    password = os.getenv("DB_PASSWORD", "1230")
-    database = os.getenv("DB_DATABASE", "qrgen")
-    url = os.getenv("POSTGRES_URL", "localhost:5432/")
-    return f"postgresql+psycopg2://{user}:{password}@{url}{database}"
+    user = config("DATABASE_USER", None)
+    password = config("DATABASE_PASSWORD", None)
+    database = config("DATABASE_NAME", None)
+    server = config("DATABASE_SERVER", None)
+    port = config("DATABASE_PORT", 5432)
+    return f"postgresql+psycopg2://{user}:{password}@{server}:{port}/{database}"
 
 
 def run_migrations_offline():
