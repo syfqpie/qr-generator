@@ -1,24 +1,25 @@
-from typing import Optional
-
 from fastapi import FastAPI
-from pydantic import BaseModel
+from configs import config, routes
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: Optional[bool] = None
+from fastapi.middleware.cors import CORSMiddleware
+settings = config.settings
 
-app = FastAPI()
+app = FastAPI(
+    title=settings.APP_NAME,
+    description=settings.APP_DESCRIPTION,
+    version=settings.APP_VERSION,
+    openapi_tags=settings.TAGS_METADATA
+)
 
-@app.get("/")
-def read_root():
-    return {"Hello", "Phew"}
+origins = ["*"]
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q
-    }
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.put("items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
+# You can change this prefix, but beware of the nginx.conf
+app.include_router(routes.router, prefix="/api")
