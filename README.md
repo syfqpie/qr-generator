@@ -1,6 +1,7 @@
 
 # QR Generator 
 [![sb](https://flat.badgen.net/badge/icon/kofi/black?icon=kofi&label)](https://github.com/syfqpie/qr-generator) [![sb](https://flat.badgen.net/badge/icon/koding/black?icon=terminal&label)](https://github.com/syfqpie/qr-generator)
+
 Simple QR code generator project made with love. This is a playground for me to learn while developing using FastApi.
 
 
@@ -68,10 +69,15 @@ Takes two numbers and returns the sum.
 To run this project, you will need to add the following environment variables to your .env file
 
 `DEBUG = `
+
 `DATABASE_USER = `
+
 `DATABASE_PASSWORD = `
+
 `DATABASE_NAME = `
+
 `DATABASE_SERVER = `
+
 `DATABASE_PORT = `
 
   
