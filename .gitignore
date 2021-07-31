@@ -29,3 +29,7 @@ env.bak/
 venv.bak/
 */env/
 
+# 
+.vscode
+/misc
+
