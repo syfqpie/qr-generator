@@ -7,7 +7,7 @@ Simple QR code generator project made with love. This is a playground for me to 
 
 ## Installation
 
-Create virtual environment & intall dependencies
+Create virtual environment & install dependencies
 
 ```bash
   virtualenv env
