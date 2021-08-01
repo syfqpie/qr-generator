@@ -6,6 +6,8 @@ from sqlalchemy.orm import Session
 
 from database.base import Base
 
+import uuid
+
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
@@ -23,7 +25,7 @@ class ControllerBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         """
         self.model = model
 
-    def get(self, db: Session, id: Any) -> Optional[ModelType]:
+    def get(self, db: Session, id: uuid.UUID) -> Optional[ModelType]:
         obj = db.query(self.model).filter(self.model.id == id).first()
         if obj is None:
             raise Exception("Object not found")
@@ -32,6 +34,13 @@ class ControllerBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
     def get_multi(
         self, db: Session, *, skip: int = 0, limit: int = 100
     ) -> List[ModelType]:
+        # print(sort, limit)
+        # if sort in self.model.__dict__.keys():
+        #     order = text('%s ASC'%sort)
+        # elif sort[1:] in self.model.__dict__.keys():
+        #     order = text('%s DESC'%sort[1:])
+        # else:
+        #     raise Exception('Attributes not found')
         return db.query(self.model).offset(skip).limit(limit).all()
 
     def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
