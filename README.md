@@ -4,90 +4,38 @@
 
 Simple QR code generator project made with love. This is a playground for me to learn while developing using FastApi.
 
+## Requirements
 
-## Installation
+* Python 3.11+
+* pipenv
+
+## Getting started
 
 Create virtual environment & install dependencies
 
 ```bash
-  virtualenv env
-  env/Scripts/activate
-  pip install -r requirements.txt
-```
-    
-## Run Locally
+# make sure you have pipenv installed then install dependencies
+$ cd ./api
+$ pipenv install --skip-lock
 
-Clone the project
+# get into the virtual environment
+$ pipenv shell
 
-```bash
-  git clone https://github.com/syfqpie/qr-generator
+# run uvicorn
+$ uvicorn main:app --reload
 ```
 
-Go to the project directory
-
-```bash
-  cd qr-generator
-```
-
-Create virtual environment
-
-```bash
-  virtualenv env
-```
-Install dependencies
-
-```bash
-  env/Scripts/activate
-  (env) pip install -r requirements.txt
-```
-
-Start the server
-
-```bash
-  uvicorn main:app --reload
-```
-
-  
 ## API Reference
 
 #### Generate QR Code
 
 ```http
-  POST /api/services/qr/generate
+  POST /api/services/generate-qr
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `link` | `string` | **Required**. Your link |
-
-
-Takes two numbers and returns the sum.
-
-  
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`DEBUG = `
-
-`DATABASE_USER = `
-
-`DATABASE_PASSWORD = `
-
-`DATABASE_NAME = `
-
-`DATABASE_SERVER = `
-
-`DATABASE_PORT = `
-
-  
-## Roadmap
-
-- Add webapp, mobile
-
-- Add few models just for fun
-
-- Deployment files
 
   
 ## Tech Stack

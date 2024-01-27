@@ -1,22 +1,13 @@
-from . import config
 from fastapi import APIRouter
+from routers import microserv
 
-from routers import items, micros
 
 router = APIRouter()
-settings = config.settings
+
 
 @router.get("/")
 def home():
-    return {"message": "Hello World"}
+    return {"detail": "Hello World"}
 
-router.include_router(
-    items.router,
-    prefix="/items",
-    tags=["items"]
-)
-router.include_router(
-    micros.router,
-    prefix="/services",
-    tags=["services"]
-)
+
+router.include_router(router=microserv.router, prefix="/services", tags=["services"])
