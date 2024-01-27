@@ -2,13 +2,11 @@ import io
 import base64
 import qrcode
 
-from pydantic.main import BaseModel
+from models import qr as qr_model
 
-class QRModel(BaseModel):
-    link: str
 
 class Service():
-    def generate(self, data: QRModel):
+    def generate(self, data: qr_model.QRModel):
         # Configure
         qr = qrcode.QRCode(
             version=1,
@@ -24,9 +22,9 @@ class Service():
         img = qr.make_image(fill_color="black", back_color="white")
 
         # Saving
-        img.save(buffer, format="png")
+        img.save(buffer)
+
         # Encode base 64 and decode utf-8
-        img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-        return img_base64
+        return base64.b64encode(buffer.getvalue()).decode("utf-8")
 
 qr_generator = Service()

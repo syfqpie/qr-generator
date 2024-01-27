@@ -1,1 +1,1 @@
-from .qr_gen import qr_generator
+from .qr import qr_generator
